@@ -16,14 +16,31 @@
 	</properties>
 	
 	<!-- 추가된 부분 (ojdbc6 다운로드를 위한 저장소) -->
-	<repositories>
+<!-- 	<repositories>
 		<repository>
 			<id>codelds</id>
 			<url>https://code.lds.org/nexus/content/groups/main-repo</url>
 		</repository>
-	</repositories>	
+	</repositories>	 -->
 	
 	<dependencies>
+	 <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+		<dependency>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		    <version>2.4.4</version>
+		</dependency>
+ 		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.8</version>
+		    <scope>provided</scope>
+		</dependency>
 		<!-- Spring Security -->
 		 <dependency>
             <groupId>org.springframework.security</groupId>
@@ -124,11 +141,11 @@
 		    <version>2.9.4</version>
 		</dependency>
 		<!-- 오라클 라이브러리 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
-		</dependency>	
+		</dependency>	 -->
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
