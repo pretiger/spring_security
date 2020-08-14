@@ -5,6 +5,11 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter @Setter @ToString
 public class UserDTO extends User {
 
 	private String userid;
@@ -16,21 +21,4 @@ public class UserDTO extends User {
 				authorities);
 		this.userid=userid;
 	}
-
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDTO [userid=" + userid + "]";
-	}
-
-	
-
-	
 }

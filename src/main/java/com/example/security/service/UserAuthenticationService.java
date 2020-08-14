@@ -1,7 +1,6 @@
 package com.example.security.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -37,18 +36,30 @@ public class UserAuthenticationService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userid) throws UsernameNotFoundException {
 		Map<String, Object> user=sqlSession.selectOne("user.selectUser", userid);
+		System.out.println("로그인 체크 : "+user);
 		if(user == null) throw new UsernameNotFoundException(userid);
 //		오라클에서는 필드명을 대문자로 적어야 함.
 //		오라클에서는 BigInteger오류가 발생할 수 있으므로 아래와 같이 처리
 //		(Integer)Integer.valueOf(user.get("ENABLED").toString()) == 1
-		List<GrantedAuthority> authority = new ArrayList<>();
-		authority.add(new SimpleGrantedAuthority(user.get("AUTHORITY").toString()));
 
-		return new UserDTO(user.get("USERNAME").toString(),
-					user.get("PASSWORD").toString(),
-					(Integer)Integer.valueOf(user.get("ENABLED").toString()) == 1,
+//		List<GrantedAuthority> authority = new ArrayList<>();
+//		authority.add(new SimpleGrantedAuthority(user.get("AUTHORITY").toString()));
+//
+//		return new UserDTO(user.get("USERNAME").toString(),
+//					user.get("PASSWORD").toString(),
+//					(Integer)Integer.valueOf(user.get("ENABLED").toString()) == 1,
+//					true, true, true, authority, 
+//					user.get("USERNAME").toString());
+		
+		//mariadb에서 check할 경우
+		List<GrantedAuthority> authority = new ArrayList<>();
+		authority.add(new SimpleGrantedAuthority(user.get("authority").toString()));
+
+		return new UserDTO(user.get("username").toString(),
+					user.get("password").toString(),
+					Integer.parseInt(user.get("enabled").toString()) == 1,
 					true, true, true, authority, 
-					user.get("USERNAME").toString());
+					user.get("username").toString());
 	}
 
 }
